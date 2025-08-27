@@ -10,8 +10,8 @@ public class Movimentação : MonoBehaviour
 
     public float dashPower = 9;
     public float dashDuration = 0.9f;
-    private bool dashOn = true;
-    public bool Nodash;
+    private bool isDashing = false;
+    public bool candash = true;
     private float dashCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
 
@@ -24,45 +24,58 @@ public class Movimentação : MonoBehaviour
     void Update()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), 
-            Input.GetAxisRaw("Vertical"));
+            Input.GetAxisRaw("Vertical")).normalized;
 
         rb.velocity = direction * Velocidade;
 
         if(direction.x != 0 && direction.y != 0) direction = direction.normalized;
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && Nodash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && candash && direction != Vector2.zero)
         {
+            Debug.Log("Dash iniciado na direção: " + direction);
             StartCoroutine(Dash());
+        }
+
+        if(isDashing)
+        {
+            Debug.DrawRay(transform.position, rb.velocity, Color.red);
         }
     }
 
     private void FixedUpdate()
     {
-        if(dashOn)
+        if(isDashing)
         {
             return;
         }
-    }
 
-    //private void Dash()
-    //{
-    //    rb.AddForce(direction * dashPower, ForceMode2D.Impulse);
-    //}
+        rb.velocity = direction * Velocidade;
+    }
 
     private IEnumerator Dash()
     {
-        dashOn = false;
-        Nodash = true;
+        candash = false;
+        isDashing = true;
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashPower, transform.localScale.y * dashPower);
+
+        rb.velocity = direction * dashPower;
         tr.emitting = true;
+
+        Debug.Log("Velocidade durante dash: " + rb.velocity);
+
         yield return new WaitForSeconds(dashDuration);
+
         tr.emitting = false;
         rb.gravityScale = originalGravity;
-        Nodash = false;
+        isDashing = false;
+
+        Debug.Log("Dash finalizado. Iniciando cooldown");
+
         yield return new WaitForSeconds(dashCooldown);
-        dashOn = false;
+        candash = true;
+        Debug.Log("Dash disponível novamente!");
     }
 }
