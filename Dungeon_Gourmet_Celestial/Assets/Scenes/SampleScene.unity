@@ -1982,8 +1982,8 @@ GameObject:
   - component: {fileID: 1716804252}
   - component: {fileID: 1716804254}
   - component: {fileID: 1716804255}
-  - component: {fileID: 1716804253}
   - component: {fileID: 1716804256}
+  - component: {fileID: 1716804253}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2307,9 +2307,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7dba7bed870ed044b524fb1a70a55b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SemCabecaAtivado: 1
+  SemCabecaAtivado: 0
   HudTransform: {fileID: 1363153258}
-  TempoDeTransformacao: 100
+  TempoDeTransformacao: 5
+  TempodeRecuperacao: 15
+  tempoAtualTransformacao: 0
+  tempoAtualRecuperacao: 0
 --- !u!1 &1946640838
 GameObject:
   m_ObjectHideFlags: 0
