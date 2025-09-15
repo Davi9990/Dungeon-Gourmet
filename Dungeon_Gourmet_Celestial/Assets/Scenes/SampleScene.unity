@@ -1662,9 +1662,9 @@ RectTransform:
   m_Father: {fileID: 1363153257}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: 136.34}
-  m_SizeDelta: {x: 80.32, y: 91.06}
+  m_AnchorMax: {x: 0.5, y: 0.5766629}
+  m_AnchoredPosition: {x: 9, y: 127.84}
+  m_SizeDelta: {x: 80.32, y: 74.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440367008
 MonoBehaviour:
@@ -1834,6 +1834,7 @@ GameObject:
   - component: {fileID: 1702662611}
   - component: {fileID: 1702662610}
   - component: {fileID: 1702662609}
+  - component: {fileID: 1702662612}
   m_Layer: 0
   m_Name: Espantalho_de_Treino
   m_TagString: Untagged
@@ -1926,7 +1927,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6320754, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -1953,6 +1954,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1702662612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702662608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25d7e92db7289e4a91040af7353453c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dano: 10
 --- !u!1 &1716804247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,10 +1981,12 @@ GameObject:
   - component: {fileID: 1716804248}
   - component: {fileID: 1716804252}
   - component: {fileID: 1716804254}
+  - component: {fileID: 1716804255}
   - component: {fileID: 1716804253}
+  - component: {fileID: 1716804256}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2046,7 +2062,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1716804250
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2260,6 +2276,40 @@ MonoBehaviour:
   LifeTotal: 100
   textLife: {fileID: 208929160}
   slideeLife: {fileID: 910552894}
+--- !u!114 &1716804255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716804247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9862e1c14515f243b51acd80be07646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillsImagens:
+  - {fileID: 255608468}
+  - {fileID: 775770108}
+  - {fileID: 580467835}
+  - {fileID: 1201506416}
+  - {fileID: 240491249}
+  escale: 1.5
+--- !u!114 &1716804256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716804247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7dba7bed870ed044b524fb1a70a55b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SemCabecaAtivado: 1
+  HudTransform: {fileID: 1363153258}
+  TempoDeTransformacao: 100
 --- !u!1 &1946640838
 GameObject:
   m_ObjectHideFlags: 0

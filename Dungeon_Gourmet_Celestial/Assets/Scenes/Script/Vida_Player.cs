@@ -12,11 +12,6 @@ public class Vida_Player : MonoBehaviour
     public Slider slideeLife;
     private string ultimaVidaExibida = "";
 
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
