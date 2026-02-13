@@ -11,6 +11,8 @@ public class Sistema_de_Transformacoes : MonoBehaviour
     public float TempoDeTransformacao = 100f;
     public float TempodeRecuperacao = 15f;
 
+    public MonoBehaviour[] scriptsTransform;
+
     [SerializeField]private float tempoAtualTransformacao;
     [SerializeField]private float tempoAtualRecuperacao;
 
@@ -19,6 +21,8 @@ public class Sistema_de_Transformacoes : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         tempoAtualTransformacao = TempoDeTransformacao;
         tempoAtualRecuperacao = TempodeRecuperacao;
+
+        EscolhendoTransformacao(0);
     }
 
     // Update is called once per frame
@@ -30,16 +34,16 @@ public class Sistema_de_Transformacoes : MonoBehaviour
 
     private void ChecarInput()
     {
-        if(Input.GetKeyDown(KeyCode.R) && tempoAtualTransformacao > 0)
+        if(Input.GetKeyDown(KeyCode.R) && tempoAtualTransformacao > 0 && scriptsTransform[1].enabled)
         {
-            SemCabecaAtivado = true;
+            SemCabecaAtivado = !SemCabecaAtivado;
             Debug.Log("Virando o sem cabeça");
         }
     }
 
     public void AtivandoTransformacao()
     {
-        if(SemCabecaAtivado)
+        if(SemCabecaAtivado && scriptsTransform[1].enabled && Input.GetKeyDown(KeyCode.R))
         {
             render.color = Color.blue;
             HudTransform.color = Color.gray;
@@ -73,8 +77,25 @@ public class Sistema_de_Transformacoes : MonoBehaviour
         }
     }
 
-    public void EscolhendoTransformacao()
+    public void EscolhendoTransformacao(int index)
     {
+        foreach(MonoBehaviour script in scriptsTransform)
+        {
+            script.enabled = false;
+        }
 
+        if(index >= 0 && index < scriptsTransform.Length)
+        {
+            scriptsTransform[index].enabled = true;
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (gameObject.CompareTag("Dullahan"))
+        {
+            SemCabecaAtivado = true;
+            EscolhendoTransformacao(1);
+        }
     }
 }

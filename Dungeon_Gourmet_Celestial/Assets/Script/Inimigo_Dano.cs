@@ -18,5 +18,18 @@ public class Inimigo_Dano : MonoBehaviour
                 vida.currentLife -= dano;
             }
         }
+
+        if(collision.gameObject.tag == "Dullahan")
+        {
+            Vida_Player vida2 = collision.gameObject.GetComponent<Vida_Player>();   
+            Dullahan dudu = gameObject.GetComponent<Dullahan>();
+
+            if(vida2 != null)
+            {
+                float danoreduzido = dano - dudu.resistencia;
+
+                vida2.currentLife -= danoreduzido;
+            }
+        }
     }
 }
