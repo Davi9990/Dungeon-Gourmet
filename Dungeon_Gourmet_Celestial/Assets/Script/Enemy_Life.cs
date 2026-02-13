@@ -15,7 +15,7 @@ public class Enemy_Life : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Morte();
     }
 
     public void Morte()

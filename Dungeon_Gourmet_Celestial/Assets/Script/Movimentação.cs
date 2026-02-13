@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class Movimentação : MonoBehaviour
 {
+    [Header("Movimentação")]
     public float Velocidade;
     private Rigidbody2D rb;
     private Vector2 direction;
 
+    [Header("Dash")]
     public float dashPower = 9;
     public float dashDuration = 0.9f;
     private bool isDashing = false;
     public bool candash = true;
     private float dashCooldown = 1f;
+
     [SerializeField] private TrailRenderer tr;
+
+    [Header("Flip")]
     private bool isFacingRight = true;
-    private bool isFacingUp = true;
+    //private bool isFacingUp = true;
+
+    [Header("Configurações de ataque")]
+    public Transform Attackpoint;
+    public float offsetAttaque = 0.5f;
 
     void Start()
     {
@@ -32,6 +41,17 @@ public class Movimentação : MonoBehaviour
 
         if(direction.x != 0 && direction.y != 0) direction = direction.normalized;
 
+        if(direction != Vector2.zero)
+        {
+            Vector2 posicaoDesejada = direction * offsetAttaque;
+
+            if(transform.localScale.x < 0)
+            {
+                posicaoDesejada.x *= -1;
+            }
+
+            Attackpoint.localPosition = posicaoDesejada;
+        }
 
         if(direction.x > 0 && isFacingRight)
         {
@@ -42,14 +62,6 @@ public class Movimentação : MonoBehaviour
             Flip();
         }
 
-        if(direction.y > 0 && !isFacingUp)
-        {
-            FlipY();
-        }
-        else if(direction.y < 0 && isFacingUp) 
-        {
-            FlipY();
-        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && candash && direction != Vector2.zero)
         {
@@ -107,11 +119,11 @@ public class Movimentação : MonoBehaviour
         transform.localScale = scaler;
     }
 
-    private void FlipY()
-    {
-        isFacingUp = !isFacingUp;
-        Vector3 scaler = transform.localScale;
-        scaler.y *= -1;
-        transform.localScale = scaler;
-    }
+    //private void FlipY()
+    //{
+    //    isFacingUp = !isFacingUp;
+    //    Vector3 scaler = transform.localScale;
+    //    scaler.y *= -1;
+    //    transform.localScale = scaler;
+    //}
 }

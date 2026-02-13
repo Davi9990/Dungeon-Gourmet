@@ -25,7 +25,7 @@ public class Ataque_Melle : MonoBehaviour
         if(Time.time >= proximoAtaque && Input.GetMouseButtonDown(0))
         {
             AttackMele() ;
-            proximoAtaque += Time.time + cooldown;
+            proximoAtaque = Time.time + cooldown;
         }
 
     }

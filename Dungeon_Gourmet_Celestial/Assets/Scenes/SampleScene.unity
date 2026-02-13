@@ -2249,6 +2249,8 @@ MonoBehaviour:
   dashDuration: 0.5
   candash: 1
   tr: {fileID: 1716804253}
+  Attackpoint: {fileID: 1904077915}
+  offsetAttaque: 2
 --- !u!96 &1716804253
 TrailRenderer:
   serializedVersion: 3
@@ -2430,7 +2432,7 @@ MonoBehaviour:
   dano: 10
   cooldown: 0.2
   AttackPoint: {fileID: 1904077915}
-  AttackCheckRadius: 2.34
+  AttackCheckRadius: 1.29
   podeAtacar: 0
   proximoAtaque: 0.1
 --- !u!1 &1904077914
@@ -2458,7 +2460,7 @@ Transform:
   m_GameObject: {fileID: 1904077914}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.19, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
