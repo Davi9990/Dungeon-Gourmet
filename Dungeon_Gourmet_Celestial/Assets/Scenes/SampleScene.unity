@@ -2674,15 +2674,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SemCabecaAtivado: 0
+  podeTransformar: 0
   HudTransform: {fileID: 1363153258}
   TempoDeTransformacao: 5
   TempodeRecuperacao: 15
+  transformavcoesdesbloqueadas: 000000
   scriptsTransform:
   - {fileID: 1716804257}
   - {fileID: 1650419199}
   - {fileID: 738313802}
   tempoAtualTransformacao: 0
   tempoAtualRecuperacao: 0
+  transformacaoAtual: 0
 --- !u!114 &1716804257
 MonoBehaviour:
   m_ObjectHideFlags: 0

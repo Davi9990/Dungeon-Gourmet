@@ -6,12 +6,15 @@ public class LiberarDullahan : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Sistema_de_Transformacoes sis = collision.GetComponent<Sistema_de_Transformacoes>();
-        sis.EscolhendoTransformacao(1);
+        if (collision.CompareTag("Player"))
+        {
+            Sistema_de_Transformacoes sis = collision.GetComponent<Sistema_de_Transformacoes>();
 
-        Debug.Log("Transformação Dullahan liberada");
+            sis.EscolhendoTransformacao(1);
 
+            Debug.Log("Transformação Dullahan liberada");
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }    
     }
 }

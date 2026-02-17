@@ -5,22 +5,32 @@ using UnityEngine.UI;
 
 public class Sistema_de_Transformacoes : MonoBehaviour
 {
+    [Header("Referências")]
     public bool SemCabecaAtivado = false;
     public Image HudTransform;
     private SpriteRenderer render;
+
+    [Header("Transformações")]
     public float TempoDeTransformacao = 100f;
     public float TempodeRecuperacao = 15f;
 
+    public bool[] transformavcoesdesbloqueadas;
     public MonoBehaviour[] scriptsTransform;
 
     [SerializeField]private float tempoAtualTransformacao;
     [SerializeField]private float tempoAtualRecuperacao;
+    [SerializeField] private int transformacaoAtual = 0;
 
     void Start()
     {
         render = GetComponent<SpriteRenderer>();
+
         tempoAtualTransformacao = TempoDeTransformacao;
         tempoAtualRecuperacao = TempodeRecuperacao;
+
+        transformavcoesdesbloqueadas = new bool[scriptsTransform.Length];
+
+        transformavcoesdesbloqueadas[0] = true;
 
         EscolhendoTransformacao(0);
     }
@@ -34,30 +44,32 @@ public class Sistema_de_Transformacoes : MonoBehaviour
 
     private void ChecarInput()
     {
-        if(Input.GetKeyDown(KeyCode.R) && tempoAtualTransformacao > 0 && scriptsTransform[1].enabled)
+        int index = 1;
+
+        if(Input.GetKeyDown(KeyCode.R) && tempoAtualTransformacao > 0 
+            && transformavcoesdesbloqueadas[index])
         {
-            SemCabecaAtivado = !SemCabecaAtivado;
+            EscolhendoTransformacao(index);
+            transformacaoAtual = index;
             Debug.Log("Virando o sem cabeça");
         }
     }
 
     public void AtivandoTransformacao()
     {
-        if(SemCabecaAtivado && scriptsTransform[1].enabled && Input.GetKeyDown(KeyCode.R))
+        
+        if (transformacaoAtual != 0)
         {
             render.color = Color.blue;
             HudTransform.color = Color.gray;
 
             tempoAtualTransformacao -= Time.deltaTime;
 
-            if(tempoAtualTransformacao <= 0)
+            if (tempoAtualTransformacao <= 0)
             {
-                SemCabecaAtivado = false;
-                tempoAtualTransformacao = 0;
-                tempoAtualRecuperacao = TempodeRecuperacao;
-                Debug.Log("Voltando ao normal");
+                VoltarAoNormal();
             }
-        }
+        }  
         else
         {
             render.color = Color.white;
@@ -71,9 +83,30 @@ public class Sistema_de_Transformacoes : MonoBehaviour
                 {
                     tempoAtualTransformacao = TempoDeTransformacao;
                     tempoAtualRecuperacao = TempodeRecuperacao;
+
                     Debug.Log("Recuperando e pronto para transformar novamente");
                 }
             }
+        }
+    }
+
+    private void VoltarAoNormal()
+    {
+        EscolhendoTransformacao(0);
+        transformacaoAtual = 0;
+
+        tempoAtualTransformacao = 0;
+        tempoAtualRecuperacao = TempodeRecuperacao;
+
+        Debug.Log("Voltando ao Normal");
+    }
+
+    public void DesbloquearTransformacao(int index)
+    {
+        if(index >= 0 && index < transformavcoesdesbloqueadas.Length)
+        {
+            transformavcoesdesbloqueadas[index] = true;
+            Debug.Log($"Transformação {index} desbloqueada!");
         }
     }
 
@@ -90,12 +123,11 @@ public class Sistema_de_Transformacoes : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (gameObject.CompareTag("Dullahan"))
         {
-            SemCabecaAtivado = true;
-            EscolhendoTransformacao(1);
+            scriptsTransform[1].enabled = true;
         }
     }
 }
